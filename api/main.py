@@ -8,4 +8,13 @@ app = FastAPI()
 async def root():
     return {"message": "Hello World!"}
 
+@app.get("/another")
+async def another():
+    return { "messgae": "Hello another user"}
+
+
+@app.post("/post-method")
+async def post_method():
+    return { "message": "Hello post-method"}
+
 handler = Mangum(app=app)
