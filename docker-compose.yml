@@ -1,0 +1,22 @@
+# services:
+#   app:
+#     build: .
+#     container_name: fastapi_container
+#     command: python app/server.py
+#     ports:
+#       - 8000:8000 # Application Port
+#       # - 5678:5678 # Debug Server
+#     volumes:
+#       - .:/project
+
+
+services:
+  protfolio_backend_api:
+    build: .
+    container_name: fastapi_container
+    command: python api/server.py
+    ports:
+      - 8000:8000 # Application Port
+      # - 5678:5678 # Debug Server
+    volumes:
+      - .:/project
