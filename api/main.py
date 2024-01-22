@@ -10,7 +10,7 @@ async def root():
 
 @app.get("/another")
 async def another():
-    return { "messgae": "Hello another user"}
+    return { "messgae": "Hello another"}
 
 
 @app.post("/post-method")
