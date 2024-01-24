@@ -1,22 +1,39 @@
-# services:
-#   app:
-#     build: .
-#     container_name: fastapi_container
-#     command: python app/server.py
-#     ports:
-#       - 8000:8000 # Application Port
-#       # - 5678:5678 # Debug Server
-#     volumes:
-#       - .:/project
-
+version: '3.9'
 
 services:
   protfolio_backend_api:
     build: .
-    container_name: fastapi_container
+    container_name: protfolio_fastAPI_container
     command: python api/server.py
     ports:
       - 8000:8000 # Application Port
       # - 5678:5678 # Debug Server
     volumes:
       - .:/project
+    
+  postgres:
+    image: postgres:16
+    container_name: protfolio_postgres_container
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+      - POSTGRES_DB=test_db
+    ports:
+      - "5432:5432"
+    volumes:
+      - data:/var/lib/postgresql/data
+    
+  pg-admin:
+    image: dpage/pgadmin4:8
+    container_name: protfolio_pgAdmin_container
+    environment:
+      - PGADMIN_DEFAULT_EMAIL=admin@gmail.com
+      - PGADMIN_DEFAULT_PASSWORD=admin
+      - PGADMIN_LISTEN_PORT=5050
+    ports:
+      - "5050:5050"
+
+
+
+volumes:
+  data:
