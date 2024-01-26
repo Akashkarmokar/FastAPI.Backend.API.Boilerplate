@@ -11,7 +11,7 @@ def test_root():
 def test_another():
     response = client.get('/another')
     assert response.status_code == 200
-    assert response.json() == { "messgae": "Hello another"}
+    assert response.json() == { "messgae": "Hello another test"}
 
 def test_post_method():
     response = client.post('/post-method')
