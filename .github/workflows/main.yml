@@ -139,6 +139,7 @@ jobs:
       #     ALEMBIC_INI: alembic.ini
       - name: Check for pending migrations
         run: |
+          . venv/bin/activate
           alembic revision --autogenerate
           alembic upgrade head
         env:
@@ -146,6 +147,6 @@ jobs:
           DB_PORT: ${{ secrets.DB_PORT }}
           DB_NAME: ${{ secrets.DATABASE_NAME }}
           DB_USER: ${{ secrets.DATABASE_USER_NAME }}
-          DB_PASSWORD: ${{ secrets.DATABASE_PASSWORD}}
+          DB_PASSWORD: ${{ secrets.DATABASE_PASSWORD }}
 
           # ALEMBIC_INI: alembic.ini
