@@ -123,3 +123,23 @@ jobs:
       - name: Activate Virtual ENV
         run: python3 -m venv venv && source venv/bin/activate && pip3 install -r requirements.txt
         if: steps.cache-venv.outputs.cache-hit != 'true'
+      # - name: Check for pending migrations
+      #   run: |
+      #     current_revision=$(alembic current)
+      #     latest_revision=$(alembic history -q --rev-range base:head | tail -n 1)
+      #     if [ "$current_revision" != "$latest_revision" ]; then
+      #       echo "There are pending migrations. Please apply them before pushing."
+      #       exit 1
+      #     else
+      #       echo "No pending migrations."
+      #       exit 0
+      #     fi
+      #   env:
+      #     DATABASE_URL: ${{ secrets.PRODUCTION_DATABASE_URL }}
+      #     ALEMBIC_INI: alembic.ini
+      - name: Check for pending migrations
+        run: |
+          echo "DATABASE_HOST_URI: $DATABASE_HOST_URI"
+        env:
+          DATABASE_HOST_URI: ${{ secrets.DATABASE_HOST_URI }}
+          # ALEMBIC_INI: alembic.ini
