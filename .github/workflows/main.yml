@@ -138,10 +138,7 @@ jobs:
       #     DATABASE_URL: ${{ secrets.PRODUCTION_DATABASE_URL }}
       #     ALEMBIC_INI: alembic.ini
       - name: Check for pending migrations
-        run: |
-          . venv/bin/activate
-          alembic revision --autogenerate
-          alembic upgrade head
+        run: . venv/bin/activate && alembic revision --autogenerate && alembic upgrade head
         env:
           DB_HOST: ${{ secrets.DATABASE_HOST_URI }}
           DB_PORT: ${{ secrets.DB_PORT }}
