@@ -139,7 +139,13 @@ jobs:
       #     ALEMBIC_INI: alembic.ini
       - name: Check for pending migrations
         run: |
-          echo "DATABASE_HOST_URI: $DATABASE_HOST_URI"
+          alembic revision --autogenerate
+          alembic upgrade head
         env:
-          DATABASE_HOST_URI: ${{ secrets.DATABASE_HOST_URI }}
+          DB_HOST: ${{ secrets.DATABASE_HOST_URI }}
+          DB_PORT: ${{ secrets.DB_PORT }}
+          DB_NAME: ${{ secrets.DATABASE_NAME }}
+          DB_USER: ${{ secrets.DATABASE_USER_NAME }}
+          DB_PASSWORD: ${{ secrets.DATABASE_PASSWORD}}
+
           # ALEMBIC_INI: alembic.ini
