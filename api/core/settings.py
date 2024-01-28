@@ -9,6 +9,7 @@ load_dotenv()
 class Config(BaseSettings):
     APP_NAME: str = os.environ.get('APP_NAME', "Protfolio")
     DEBUG: bool = bool(os.environ.get('DEBUG', False))
+    ENVIRONMENT_MODE: str = os.environ.get('ENVIRONMENT_MODE', 'local')
 
 
 class LocalConfig(Config):
