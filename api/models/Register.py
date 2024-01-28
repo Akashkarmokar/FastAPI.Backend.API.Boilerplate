@@ -12,7 +12,7 @@ class Register(TimestampedModel):
     email = Column(String, nullable=False)
     password = Column(String, nullable=False)
     first_name = Column(String, nullable=False)
-    last_name = Column(String, nullable=False)
+    # last_name = Column(String, nullable=False)
     # is_active = Column(Boolean, default=True)
 
     # Relationships
