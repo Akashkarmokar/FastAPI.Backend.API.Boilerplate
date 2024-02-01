@@ -1,26 +1,21 @@
 from sqlalchemy.orm import Mapped, mapped_column
-from sqlalchemy import Column, Integer, String, Boolean
+from sqlalchemy import Text
 from .Timestamps import TimestampedModel
 from sqlalchemy.orm import Relationship
 from api.core.db import AsyncSession
+from enum import Enum
+
+
+class UserStatus(Enum):
+    ACTIVE = "ACTIVE"
+    PENDING = "PENDING"
+    DISABLE = "DISABLE"
 
 
 class Register(TimestampedModel):
     __tablename__ = 'registers'
 
-    id = Column(Integer, primary_key=True, autoincrement=True)
-    email = Column(String, nullable=False)
-    password = Column(String, nullable=False)
-    first_name = Column(String, nullable=False)
-    # last_name = Column(String, nullable=False)
-    # is_active = Column(Boolean, default=True)
-
-    # Relationships
-    # links = Relationship("Link", back_populates="register", passive_deletes=True)
-    # tags = Relationship("Tag", back_populates="inserted_by", passive_deletes=True)
-
-    # @classmethod
-    # async def create_single_user(cls, session: AsyncSession, email: str, password: str):
-    #
-    # def __repr__(self):
-    #     return f'{self.email} and email : {self.password}'
+    id: Mapped[int] = mapped_column(primary_key=True)
+    email: Mapped[str] = mapped_column(nullable=False)
+    password: Mapped[str] = mapped_column(nullable=False)
+    status: Mapped[UserStatus]
