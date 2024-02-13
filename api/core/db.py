@@ -16,7 +16,7 @@ DatabaseURL = f'postgresql+asyncpg://{db_user_name}:{db_password}@{db_host}:{db_
 ssl_object = None
 async_engine = None
 
-print("F: ***** ", config.ENVIRONMENT_MODE)
+
 if config.ENVIRONMENT_MODE == 'local':
     async_engine = create_async_engine(url=DatabaseURL, echo=True )
 else:

@@ -20,6 +20,9 @@ class LocalConfig(Config):
     DB_PASSWORD: str = os.environ.get('DB_PASSWORD')
     DB_NAME: str = os.environ.get('DB_NAME')
     DB_URL: str = f'postgresql+asyncpg://{DB_USERNAME}:{DB_PASSWORD}@{DB_HOST}:{DB_PORT}/{DB_NAME}'
+    JWT_SECRET_KEY: str = os.environ.get('JWT_SECRET_KEY')
+    JWT_ALGORITHM: str = os.environ.get('JWT_ALGORITHM')
+    JWT_ACCESS_TOKEN_EXPIRE_MINUTES: str = os.environ.get('JWT_ACCESS_TOKEN_EXPIRE_MINUTES')
 
 
 def get_config():

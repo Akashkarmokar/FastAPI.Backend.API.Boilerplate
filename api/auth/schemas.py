@@ -7,7 +7,9 @@ class SignupDTO(BaseModel):
     email: str
     password: str 
 
-
+class SigninDTO(BaseModel):
+    email: str
+    password: str
 
 
 # Right Down All Response Model Below
