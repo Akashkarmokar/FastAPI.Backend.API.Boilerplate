@@ -23,7 +23,15 @@ class PassHash:
         if expires_delta:
             expire = datetime.now(timezone.utc) + expires_delta
         else :
-            expire = datetime.now(timezone.utc) + timedelta(minutes=15) 
+            expire = datetime.now(timezone.utc) + timedelta(days=2) 
         to_encode.update({ 'exp': expire })
         encoded_jwt = jwt.encode(claims=to_encode,key= config.JWT_SECRET_KEY, algorithm= config.JWT_ALGORITHM)
         return encoded_jwt
+    
+    def check_acces_token(self, access_token: str) -> bool:
+        try :
+            payload = jwt.decode(access_token,config.JWT_SECRET_KEY,algorithms=[config.JWT_ALGORITHM])
+            return True
+        except Exception as e:
+            print("error: ", e)
+            return False

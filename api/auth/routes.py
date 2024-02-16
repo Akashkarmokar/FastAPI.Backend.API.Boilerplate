@@ -1,4 +1,4 @@
-from fastapi import APIRouter, status, Response, HTTPException
+from fastapi import FastAPI, APIRouter, status, Response, HTTPException
 from fastapi.responses import JSONResponse
 from fastapi.encoders import jsonable_encoder
 from .schemas import SignupDTO, SigninDTO
@@ -7,7 +7,10 @@ from models.Register import Register
 from core.db import AsyncSession
 from .helpers import PassHash
 
-AuthRoutes = APIRouter(tags=["Auth"],prefix="/auth")
+# AuthRoutes = APIRouter(tags=["Auth"],prefix="/auth")
+
+AuthRoutes = FastAPI()
+
 
 @AuthRoutes.post("/sign-up", status_code = status.HTTP_200_OK)
 async def signup_user(request_body: SignupDTO, response: Response, session: AsyncSession):
