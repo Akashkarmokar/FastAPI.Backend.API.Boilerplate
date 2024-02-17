@@ -46,7 +46,7 @@ class ReadRegisterRepository:
                 stmt = select(RegisterModel.id, RegisterModel.email)
                 stmt_result = await session.execute(stmt)
                 all_users = stmt_result.all()
-                all_users = [ dict(row._asdict()) for row in all_users ]
+                all_users = [ row._asdict() for row in all_users ]
                 return all_users
 
         except Exception as e :

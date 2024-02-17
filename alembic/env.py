@@ -8,9 +8,9 @@ from api.core.db import async_engine
 
 # Must Import All Of your Models here
 from api.models.Register import Register
-# from app.Models.Links import Link
-# from app.Models.Tags import Tag
-# from app.Models.LinkTags import LinkTag
+from api.models.Profile import Profile
+from api.models.SocialMedia import SocialMedia
+
 from api.models.Base import Base
 
 
