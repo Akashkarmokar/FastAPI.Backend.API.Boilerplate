@@ -94,3 +94,19 @@ async def sign_in_user(request_body: SigninDTO, response: Response, session: Asy
             "data": None
         })
         return JSONResponse(content=data)
+
+@AuthRoutes.get("/all-users")
+async def get_all_users(session: AsyncSession):
+    try:
+        allUsers = await ReadRegisterRepository(session=session).all_users()
+        return JSONResponse(content=jsonable_encoder({
+            "message": "OK",
+            "status_code": 400,
+            "data": None if allUsers == None else allUsers
+        }))
+    except Exception as e:
+        return JSONResponse(content=jsonable_encoder({
+            "message": "BAD",
+            "status_code": 400,
+            "data": None
+        }))

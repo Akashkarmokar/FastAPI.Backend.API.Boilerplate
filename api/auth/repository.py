@@ -30,6 +30,29 @@ class ReadRegisterRepository:
             print("Error: ", e)
             print("Something went wrong with internal server")
             return None
+    
+    async def all_users(self):
+        try:
+            async with self.session.begin() as session:
+                # stmt = select(RegisterModel)
+                # stmt_result = await session.execute(stmt)
+                # print(stmt_result)
+                # all_users = stmt_result.all()
+                # all_users = [ row[0].__dict__ for row in all_users]
+
+                # all_users2 = [{k: v for k, v in row.items() if not k.startswith('_sa_')} for row in all_users ]
+                # print(all_users2)
+                # return []
+                stmt = select(RegisterModel.id, RegisterModel.email)
+                stmt_result = await session.execute(stmt)
+                all_users = stmt_result.all()
+                all_users = [ dict(row._asdict()) for row in all_users ]
+                return all_users
+
+        except Exception as e :
+            print("Error: ", e)
+            print("Something went wrong with internal server")
+            return None      
 
 
 class CreateRegisterRepository:
