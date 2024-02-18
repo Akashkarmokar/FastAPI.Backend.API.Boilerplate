@@ -47,7 +47,7 @@ class ReadRegisterRepository:
                 stmt_result = await session.execute(stmt)
                 all_users = stmt_result.all()
                 all_users = [ row._asdict() for row in all_users ]
-                return all_users
+            return all_users
 
         except Exception as e :
             print("Error: ", e)
