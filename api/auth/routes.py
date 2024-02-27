@@ -1,7 +1,7 @@
 from fastapi import FastAPI, APIRouter, status, Response, HTTPException
 from fastapi.responses import JSONResponse
 from fastapi.encoders import jsonable_encoder
-from .schemas import SignupDTO, SigninDTO
+from .schemas import SignupDTO, SigninDTO, CheckTokenDTO
 from .repository import CreateRegisterRepository, ReadRegisterRepository
 from models.Register import Register
 from core.db import AsyncSession
@@ -109,4 +109,27 @@ async def get_all_users(session: AsyncSession):
             "message": "BAD",
             "status_code": 400,
             "data": None
+        }))
+
+@AuthRoutes.post('/check-token')
+async def check_token(request_body: CheckTokenDTO, session: AsyncSession):
+    try:
+        isTokenValid = PassHash().check_acces_token(request_body.token)
+        if isTokenValid == True:
+            return JSONResponse(content= jsonable_encoder({
+                "message": "OK",
+                "status_code": 200,
+                "data": True
+            }))
+        else:
+            return JSONResponse(content= jsonable_encoder({
+                "message": "BAD",
+                "status_code": 400,
+                "data": False
+            }))
+    except Exception as e:
+        return JSONResponse(content= jsonable_encoder({
+            "message": "BAD",
+            "status_code": 400,
+            "data": False
         }))

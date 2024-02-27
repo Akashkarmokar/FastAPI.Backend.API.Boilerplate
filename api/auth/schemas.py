@@ -12,6 +12,11 @@ class SigninDTO(BaseModel):
     password: str
 
 
+class CheckTokenDTO(BaseModel):
+    token: str
+
+
+
 # Right Down All Response Model Below
 class BaseResponse(BaseModel):
     message: str 
