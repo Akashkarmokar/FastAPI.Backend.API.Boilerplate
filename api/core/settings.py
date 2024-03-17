@@ -25,6 +25,9 @@ class LocalConfig(Config):
     JWT_ACCESS_TOKEN_EXPIRE_MINUTES: str = os.environ.get('JWT_ACCESS_TOKEN_EXPIRE_MINUTES')
     AWS_S3_CLIENT_ACCESS_KEY: str = os.environ.get('AWS_S3_CLIENT_ACCESS_KEY')
     AWS_S3_CLIENT_SECRET_ACCESS_KEY: str = os.environ.get('AWS_S3_CLIENT_SECRET_ACCESS_KEY')
+    AWS_REGION_NAME: str = os.environ.get('AWS_REGION_NAME')
+    AWS_S3_BUCKET_NAME: str = os.environ.get('AWS_S3_BUCKET_NAME')
+    
 
 
 def get_config():

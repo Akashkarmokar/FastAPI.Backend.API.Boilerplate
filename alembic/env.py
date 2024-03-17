@@ -10,6 +10,7 @@ from api.core.db import async_engine
 from api.models.Register import Register
 from api.models.Profile import Profile
 from api.models.SocialMedia import SocialMedia
+from api.models.Bio import Bio
 
 from api.models.Base import Base
 

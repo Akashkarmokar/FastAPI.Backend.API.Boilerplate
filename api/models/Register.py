@@ -4,10 +4,10 @@ from .Timestamps import TimestampedModel
 import enum
 # from sqlalchemy.dialects.postgresql import ENUM as pgEnum
 
-class Status(enum.Enum):
-    active = 'active'
-    pending = 'pending'
-    deactive = 'deactive'
+# class Status(enum.Enum):
+#     active = 'active'
+#     pending = 'pending'
+#     deactive = 'deactive'
 
 
 class Register(TimestampedModel):

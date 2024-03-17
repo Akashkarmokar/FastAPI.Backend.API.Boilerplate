@@ -9,7 +9,7 @@ from .helpers import PassHash
 
 # AuthRoutes = APIRouter(tags=["Auth"],prefix="/auth")
 
-AuthRoutes = FastAPI()
+AuthRoutes = APIRouter()
 
 
 @AuthRoutes.post("/sign-up", status_code = status.HTTP_200_OK)

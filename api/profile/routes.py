@@ -1,11 +1,11 @@
-from fastapi import FastAPI
+from fastapi import APIRouter
 from .schemas import AddMediaDTO
 from core.db import AsyncSession
 from fastapi.responses import JSONResponse
 from fastapi.encoders import jsonable_encoder
 from .repository import ProfileRepository
 
-ProfileAPP = FastAPI()
+ProfileAPP = APIRouter()
 
 @ProfileAPP.post('/add-profile')
 async def add_profile(request_body: AddMediaDTO, session: AsyncSession):
