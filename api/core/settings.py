@@ -33,7 +33,7 @@ class LocalConfig(Config):
 def get_config():
     env = os.environ.get('ENVIRONMENT_MODE', 'local')
     config_type = {
-        'local': LocalConfig()
+        'local': LocalConfig() 
     }
     return config_type[env]
 
