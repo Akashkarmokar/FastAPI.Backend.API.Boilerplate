@@ -13,4 +13,5 @@ class ProfileChange(BaseModel):
     name:str = None
     note: str = None
     image_key: str = None
+    designation: str = None
 

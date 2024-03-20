@@ -11,7 +11,7 @@ class BioRepository:
     async def find_the_bio(self):
         try:
             async with self.session.begin() as session:
-                stmt = select(BioModel.id, BioModel.name, BioModel.note, BioModel.image_key)
+                stmt = select(BioModel.id, BioModel.name, BioModel.note, BioModel.image_key, BioModel.designation)
                 stmt_result = await session.execute(stmt)
                 stmt_result = stmt_result.one_or_none()
                 if stmt_result != None :
@@ -22,12 +22,12 @@ class BioRepository:
             return None
         
 
-    async def create_bio(self, name = None, note = None, image_key = None):
+    async def create_bio(self, name = None, note = None, designation = None, image_key = None):
         try:
             async with self.session.begin() as session:
                 existedBio = await self.find_the_bio()
                 if existedBio == None: # If no record exist yet now, create one
-                    new_bio = BioModel(name = name, note = note, image_key = image_key)
+                    new_bio = BioModel(name = name, note = note, designation = designation, image_key = image_key)
                     session.add(new_bio)
                     await session.commit()
                 else:  # else edit existed one
@@ -38,6 +38,8 @@ class BioRepository:
                         update_data.update({ 'note': note})
                     if image_key: 
                         update_data.update({ 'image_key': image_key })
+                    if designation:
+                        update_data.update({ 'designation': designation })
                     
                     update_stmt = update(BioModel).where(BioModel.id == existedBio.get('id')).values(**update_data)
                     update_stmt = await session.execute(update_stmt)
