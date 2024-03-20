@@ -6,7 +6,7 @@ services:
     container_name: protfolio_fastAPI_container
     command: python api/server.py
     ports:
-      - 8000:8000 # Application Port
+      - 8086:8086 # Application Port
       # - 5678:5678 # Debug Server
     volumes:
       - .:/project

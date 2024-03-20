@@ -1,26 +1,24 @@
 from sqlalchemy.orm import Mapped, mapped_column
-from sqlalchemy import Column, Integer, String, Boolean
+from sqlalchemy import Enum
 from .Timestamps import TimestampedModel
-from sqlalchemy.orm import Relationship
-from api.core.db import AsyncSession
+import enum
+# from sqlalchemy.dialects.postgresql import ENUM as pgEnum
+
+# class Status(enum.Enum):
+#     active = 'active'
+#     pending = 'pending'
+#     deactive = 'deactive'
 
 
 class Register(TimestampedModel):
     __tablename__ = 'registers'
 
-    id = Column(Integer, primary_key=True, autoincrement=True)
-    email = Column(String, nullable=False)
-    password = Column(String, nullable=False)
-    first_name = Column(String, nullable=False)
-    # last_name = Column(String, nullable=False)
-    # is_active = Column(Boolean, default=True)
-
-    # Relationships
-    # links = Relationship("Link", back_populates="register", passive_deletes=True)
-    # tags = Relationship("Tag", back_populates="inserted_by", passive_deletes=True)
-
-    # @classmethod
-    # async def create_single_user(cls, session: AsyncSession, email: str, password: str):
-    #
-    # def __repr__(self):
-    #     return f'{self.email} and email : {self.password}'
+    id: Mapped[int] = mapped_column(primary_key=True)
+    email: Mapped[str] = mapped_column(nullable=False)
+    password: Mapped[str] = mapped_column(nullable=False)
+    # alive_status = mapped_column(
+    #     Enum(Status),
+    #     default=Status.pending.value,
+    #     nullable=False,
+    #     server_default=Status.pending.value
+    # )
