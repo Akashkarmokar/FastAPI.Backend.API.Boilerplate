@@ -26,7 +26,7 @@ class LocalConfig(Config):
     AWS_S3_CLIENT_ACCESS_KEY: str = os.environ.get('AWS_S3_CLIENT_ACCESS_KEY') 
     AWS_S3_CLIENT_SECRET_ACCESS_KEY: str = os.environ.get('AWS_S3_CLIENT_SECRET_ACCESS_KEY') 
     AWS_REGION_NAME: str = os.environ.get('AWS_REGION_NAME') 
-    AWS_S3_BUCKET_NAME: str = os.environ.get('AWS_S3_BUCKET_NAME') 
+    AWS_S3_BUCKET_NAME: str = os.environ.get('AWS_S3_BUCKET_NAME')  
     
 
 
