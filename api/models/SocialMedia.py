@@ -13,7 +13,7 @@ class SocialMedia(TimestampedModel):
 
     id: Mapped[int] = mapped_column(primary_key=True)
     media_domain_name: Mapped[str] = mapped_column(nullable=False)
-    profile_linK: Mapped[str] = mapped_column(nullable=False)
+    profile_linK: Mapped[str] = mapped_column(nullable=False) 
     # status: Mapped[str] = mapped_column(
     #     Enum(SocialMediaStatus),
     #     default=SocialMediaStatus.pending.value,
