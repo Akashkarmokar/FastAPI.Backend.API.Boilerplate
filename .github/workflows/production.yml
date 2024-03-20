@@ -111,7 +111,7 @@ jobs:
           DB_HOST: ${{ secrets.DATABASE_HOST_URI }}
           DB_PORT: ${{ secrets.DATABASE_PORT }}
           DB_NAME: ${{ secrets.DATABASE_NAME }}
-          DB_USERNAME: ${{ secrets.DATABASE_USER_NAME }}
+          DB_USER: ${{ secrets.DATABASE_USER_NAME }}
           DB_PASSWORD: ${{ secrets.DATABASE_PASSWORD }}
           ENVIRONMENT_MODE: "local"
           JWT_SECRET_KEY: "KEY" 
