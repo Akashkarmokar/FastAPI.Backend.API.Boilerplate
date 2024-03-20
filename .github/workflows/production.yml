@@ -113,7 +113,7 @@ jobs:
           DB_NAME: ${{ secrets.DATABASE_NAME }}
           DB_USER: ${{ secrets.DATABASE_USER_NAME }}
           DB_PASSWORD: ${{ secrets.DATABASE_PASSWORD }}
-          ENVIRONMENT_MODE: local
+          ENVIRONMENT_MODE: "local"
 
       - name: Install AWS CLI
         uses: unfor19/install-aws-cli-action@v1
