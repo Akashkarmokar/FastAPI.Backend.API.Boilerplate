@@ -111,9 +111,16 @@ jobs:
           DB_HOST: ${{ secrets.DATABASE_HOST_URI }}
           DB_PORT: ${{ secrets.DATABASE_PORT }}
           DB_NAME: ${{ secrets.DATABASE_NAME }}
-          DB_USER: ${{ secrets.DATABASE_USER_NAME }}
+          DB_USERNAME: ${{ secrets.DATABASE_USER_NAME }}
           DB_PASSWORD: ${{ secrets.DATABASE_PASSWORD }}
           ENVIRONMENT_MODE: "local"
+          JWT_SECRET_KEY: "KEY" 
+          JWT_ALGORITHM: "KEY" 
+          JWT_ACCESS_TOKEN_EXPIRE_MINUTES: "KEY" 
+          AWS_S3_CLIENT_ACCESS_KEY: "KEY" 
+          AWS_S3_CLIENT_SECRET_ACCESS_KEY: "KEY" 
+          AWS_REGION_NAME: "KEY" 
+          AWS_S3_BUCKET_NAME: "KEY" 
 
       - name: Install AWS CLI
         uses: unfor19/install-aws-cli-action@v1
