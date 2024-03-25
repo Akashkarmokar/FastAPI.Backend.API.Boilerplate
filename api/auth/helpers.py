@@ -2,15 +2,18 @@ from passlib.context import CryptContext
 from datetime import datetime, timedelta, timezone
 from jose import jwt
 from core.settings import config
+import bcrypt
 
 pwd_context = CryptContext(schemes=["bcrypt"], deprecated="auto")
 
 
 class PassHash:
     def __init__(self) -> None:
-        self.pwd_context = CryptContext(schemes=["bcrypt"], deprecated="auto")
+        # self.pwd_context = CryptContext(schemes=["bcrypt"], deprecated="auto")
+        self.salt = bcrypt.gensalt()
     
     def get_hash_password(self, plain_password: str) -> str:
+        return bcrypt.hashpw(plain_password.encode('utf-8'), salt=self.salt)
         return self.pwd_context.hash(plain_password)
     
     def verify_password(self, plain_password: str, hash_password: str) -> bool:
