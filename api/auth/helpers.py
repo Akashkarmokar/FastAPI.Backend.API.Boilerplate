@@ -1,10 +1,10 @@
-from passlib.context import CryptContext
+# from passlib.context import CryptContext
 from datetime import datetime, timedelta, timezone
 from jose import jwt
 from core.settings import config
 import bcrypt
 
-pwd_context = CryptContext(schemes=["bcrypt"], deprecated="auto")
+# pwd_context = CryptContext(schemes=["bcrypt"], deprecated="auto")
 
 
 class PassHash:
@@ -17,7 +17,8 @@ class PassHash:
         return self.pwd_context.hash(plain_password)
     
     def verify_password(self, plain_password: str, hash_password: str) -> bool:
-        return self.pwd_context.verify(plain_password, hash_password)
+        # return self.pwd_context.verify(plain_password, hash_password)
+        pass
 
     def create_access_token(self, data_to_encode: dict, expires_delta: timedelta | None = None) -> str:
         to_encode = data_to_encode.copy()
