@@ -1,5 +1,3 @@
-import sys
-sys.path.append('..')
 from passlib.context import CryptContext
 from datetime import datetime, timedelta, timezone
 from jose import jwt
