@@ -13,7 +13,7 @@ class PassHash:
         pass
     
     def get_hash_password(self, plain_password: str) -> str:
-        return bcrypt.hash(plain_password)
+        return bcrypt.hash(plain_password) 
         # return bcrypt.hashpw(plain_password.encode('utf-8'), salt=self.salt)
         # return self.pwd_context.hash(plain_password)
     
