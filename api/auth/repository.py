@@ -69,5 +69,6 @@ class CreateRegisterRepository:
                 created_user = await ReadRegisterRepository(self.session).read_by_id(user.id)
                 return created_user
         except Exception as err:
+            print("Err: ", err)
             print('Something went wrong  from repository!!')
             return None
