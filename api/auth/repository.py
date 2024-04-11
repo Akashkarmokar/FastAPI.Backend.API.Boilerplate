@@ -62,9 +62,9 @@ class CreateRegisterRepository:
     async def create_user(self,email: str, plain_password: str):
         try:
             async with self.session.begin() as session:
-                hash_pass = PassHash().get_hash_password(plain_password= plain_password)
+                # hash_pass = PassHash().get_hash_password(plain_password= plain_password)
                 # hash_pass = "hello"
-                user = RegisterModel(email=email, password = hash_pass)
+                user = RegisterModel(email=email, password = plain_password)
                 session.add(user)
                 await session.commit()
                 created_user = await ReadRegisterRepository(self.session).read_by_id(user.id)
