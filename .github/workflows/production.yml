@@ -127,14 +127,12 @@ jobs:
       
       - name: Migration If Need
         run: |
-          . venv/bin/activate 
-          echo " Last variable: *** : $RETURN_CODE"
+          echo " Last variable: *** : $RETURN_CODE test"
           if [ $RETURN_CODE -eq 0 ]; then
             echo " No new migrations needed. Everything is up-to-date!"
           else
-            echo " Unmigrated changes detected in your models!"
-            echo "Please generate new migrations using 'alembic revision --autogenerate'."
-            alembic upgrade head
+            . venv/bin/activate
+            alembic upgrade head 
           fi
         env:
           DB_HOST: ${{ secrets.DATABASE_HOST_URI }}
