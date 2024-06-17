@@ -106,6 +106,8 @@ jobs:
         run: |
           . venv/bin/activate
           alembic check
+          RETURN_CODE=$?
+          echo "Return code is $RETURN_CODE"
         env:
           DB_HOST: ${{ secrets.DATABASE_HOST_URI }}
           DB_PORT: ${{ secrets.DATABASE_PORT }}
