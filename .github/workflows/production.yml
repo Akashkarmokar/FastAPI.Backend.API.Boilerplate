@@ -105,7 +105,7 @@ jobs:
       - name: Check for pending migrations
         run: |
           . venv/bin/activate
-          alembic upgrade head
+          alembic check
         env:
           DB_HOST: ${{ secrets.DATABASE_HOST_URI }}
           DB_PORT: ${{ secrets.DATABASE_PORT }}
@@ -120,7 +120,32 @@ jobs:
           AWS_S3_CLIENT_SECRET_ACCESS_KEY: "KEY" 
           AWS_REGION_NAME: "KEY" 
           AWS_S3_BUCKET_NAME: "KEY" 
-
+      
+      - name: Migration If Need
+        run: |
+          . venv/bin/activate
+          if [ $? -eq 0 ]; then
+            echo " No new migrations needed. Everything is up-to-date!"
+          else
+            echo " Unmigrated changes detected in your models!"
+            echo "Please generate new migrations using 'alembic revision --autogenerate'."
+            alembic upgrade head
+          fi
+        env:
+          DB_HOST: ${{ secrets.DATABASE_HOST_URI }}
+          DB_PORT: ${{ secrets.DATABASE_PORT }}
+          DB_NAME: ${{ secrets.DATABASE_NAME }}
+          DB_USER: ${{ secrets.DATABASE_USER_NAME }}
+          DB_PASSWORD: ${{ secrets.DATABASE_PASSWORD }}
+          ENVIRONMENT_MODE: "local"
+          JWT_SECRET_KEY: "KEY" 
+          JWT_ALGORITHM: "KEY" 
+          JWT_ACCESS_TOKEN_EXPIRE_MINUTES: "KEY" 
+          AWS_S3_CLIENT_ACCESS_KEY: "KEY" 
+          AWS_S3_CLIENT_SECRET_ACCESS_KEY: "KEY" 
+          AWS_REGION_NAME: "KEY" 
+          AWS_S3_BUCKET_NAME: "KEY" 
+  
       - name: Install AWS CLI
         uses: unfor19/install-aws-cli-action@v1
         with:
