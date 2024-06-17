@@ -128,7 +128,7 @@ jobs:
       - name: Migration If Need
         run: |
           . venv/bin/activate 
-          echo " Last variable: *** : $?"
+          echo " Last variable: *** : $RETURN_CODE"
           if [ $RETURN_CODE -eq 0 ]; then
             echo " No new migrations needed. Everything is up-to-date!"
           else
