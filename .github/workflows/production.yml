@@ -104,6 +104,7 @@ jobs:
       
       - name: Check for pending migrations
         run: |
+          set -o pipefail
           . venv/bin/activate
           alembic check
           RETURN_CODE=$?
