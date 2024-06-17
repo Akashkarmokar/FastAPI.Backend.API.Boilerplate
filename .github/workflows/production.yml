@@ -120,6 +120,7 @@ jobs:
           AWS_S3_CLIENT_SECRET_ACCESS_KEY: "KEY" 
           AWS_REGION_NAME: "KEY" 
           AWS_S3_BUCKET_NAME: "KEY" 
+        continue-on-error: true
       
       - name: Migration If Need
         run: |
