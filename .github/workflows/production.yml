@@ -129,7 +129,7 @@ jobs:
         run: |
           . venv/bin/activate 
           echo " Last variable: *** : $?"
-          if [ $? -eq 0 ]; then
+          if [ $RETURN_CODE -eq 0 ]; then
             echo " No new migrations needed. Everything is up-to-date!"
           else
             echo " Unmigrated changes detected in your models!"
