@@ -106,7 +106,7 @@ jobs:
         run: |
           set -o pipefail
           . venv/bin/activate
-          alembic check || true
+          alembic check 
           RETURN_CODE=$?
           echo "Return code is $RETURN_CODE"
         env:
