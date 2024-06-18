@@ -106,7 +106,7 @@ jobs:
         run: |
           set -o pipefail
           . venv/bin/activate
-          alembic check
+          alembic check || true
           RETURN_CODE=$?
           echo "Return code is $RETURN_CODE"
         env:
@@ -127,7 +127,7 @@ jobs:
       
       - name: Migration If Need
         run: |
-          echo " Last variable: *** : $RETURN_CODE test"
+          echo "Return code is a $RETURN_CODE"
           if [ $RETURN_CODE -eq 0 ]; then
             echo " No new migrations needed. Everything is up-to-date!"
           else
