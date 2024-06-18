@@ -125,11 +125,11 @@ jobs:
           AWS_S3_BUCKET_NAME: "KEY" 
         continue-on-error: true
       
-      - name: Migration If Need
+      - name: Migration If Need 
         run: |
           RETURN_CODE=${RETURN_CODE:-1}
           echo "Return code is a $RETURN_CODE"
-          if [ $RETURN_CODE -eq 0 ]; then
+          if [ "$RETURN_CODE" -eq 0 ]; then
             echo " No new migrations needed. Everything is up-to-date!"
           else
             . venv/bin/activate
