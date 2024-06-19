@@ -106,33 +106,13 @@ jobs:
         run: |
           set -o pipefail
           . venv/bin/activate
-          alembic check 
-          RETURN_CODE=$?
-          echo "Return code is $RETURN_CODE"
-        env:
-          DB_HOST: ${{ secrets.DATABASE_HOST_URI }}
-          DB_PORT: ${{ secrets.DATABASE_PORT }}
-          DB_NAME: ${{ secrets.DATABASE_NAME }}
-          DB_USER: ${{ secrets.DATABASE_USER_NAME }}
-          DB_PASSWORD: ${{ secrets.DATABASE_PASSWORD }}
-          ENVIRONMENT_MODE: "local"
-          JWT_SECRET_KEY: "KEY" 
-          JWT_ALGORITHM: "KEY" 
-          JWT_ACCESS_TOKEN_EXPIRE_MINUTES: "KEY" 
-          AWS_S3_CLIENT_ACCESS_KEY: "KEY" 
-          AWS_S3_CLIENT_SECRET_ACCESS_KEY: "KEY" 
-          AWS_REGION_NAME: "KEY" 
-          AWS_S3_BUCKET_NAME: "KEY" 
-        continue-on-error: true
-      
-      - name: Migration If Need 
-        run: |
-          RETURN_CODE=${RETURN_CODE:-1}
-          echo "Return code is a $RETURN_CODE"
-          if [ "$RETURN_CODE" -eq 0 ]; then
+          alembic check
+          alembicReturnCode=$?
+          echo "Return code is $alembicReturnCode"
+          if [ "$alembicReturnCode" -eq 0 ]; then
             echo " No new migrations needed. Everything is up-to-date!"
           else
-            . venv/bin/activate
+            echo "Ugrdae Head"
             alembic upgrade head 
           fi
         env:
@@ -149,6 +129,32 @@ jobs:
           AWS_S3_CLIENT_SECRET_ACCESS_KEY: "KEY" 
           AWS_REGION_NAME: "KEY" 
           AWS_S3_BUCKET_NAME: "KEY" 
+        continue-on-error: true
+      
+      # - name: Migration If Need 
+      #   run: |
+      #     RETURN_CODE=${RETURN_CODE:-1}
+      #     echo "Return code is a $RETURN_CODE"
+      #     if [ "$RETURN_CODE" -eq 0 ]; then
+      #       echo " No new migrations needed. Everything is up-to-date!"
+      #     else
+      #       . venv/bin/activate
+      #       alembic upgrade head 
+      #     fi
+      #   env:
+      #     DB_HOST: ${{ secrets.DATABASE_HOST_URI }}
+      #     DB_PORT: ${{ secrets.DATABASE_PORT }}
+      #     DB_NAME: ${{ secrets.DATABASE_NAME }}
+      #     DB_USER: ${{ secrets.DATABASE_USER_NAME }}
+      #     DB_PASSWORD: ${{ secrets.DATABASE_PASSWORD }}
+      #     ENVIRONMENT_MODE: "local"
+      #     JWT_SECRET_KEY: "KEY" 
+      #     JWT_ALGORITHM: "KEY" 
+      #     JWT_ACCESS_TOKEN_EXPIRE_MINUTES: "KEY" 
+      #     AWS_S3_CLIENT_ACCESS_KEY: "KEY" 
+      #     AWS_S3_CLIENT_SECRET_ACCESS_KEY: "KEY" 
+      #     AWS_REGION_NAME: "KEY" 
+      #     AWS_S3_BUCKET_NAME: "KEY" 
   
       - name: Install AWS CLI
         uses: unfor19/install-aws-cli-action@v1
