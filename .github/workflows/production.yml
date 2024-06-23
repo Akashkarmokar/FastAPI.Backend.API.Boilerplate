@@ -74,6 +74,8 @@ jobs:
       - uses: actions/checkout@v4
         with:
           ref: ${{ github.sha }}
+        
+
       
       # Step-1 Setup Python
       - name: Set up Python
@@ -106,6 +108,8 @@ jobs:
       
       - name: Check for pending migrations
         run: |
+        
+          echo "Return code is $alembicReturnCode" ${{ github.sha }}
           set -o pipefail
           . venv/bin/activate
           alembic check
