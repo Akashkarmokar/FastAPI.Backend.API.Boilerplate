@@ -11,5 +11,7 @@ class Bio(TimestampedModel):
     note: Mapped[Text] = mapped_column(Text,nullable=True)
     designation: Mapped[Text] = mapped_column(Text, nullable=True)
     image_key: Mapped[Text] = mapped_column(Text, nullable=True) 
+
+    
     
     
