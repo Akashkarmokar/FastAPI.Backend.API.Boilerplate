@@ -72,6 +72,8 @@ jobs:
     steps:
       # Check out repo so our workflow can access it
       - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.sha }}
       
       # Step-1 Setup Python
       - name: Set up Python
