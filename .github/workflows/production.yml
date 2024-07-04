@@ -72,8 +72,8 @@ jobs:
     steps:
       # Check out repo so our workflow can access it
       - uses: actions/checkout@v4
-        # with:
-        #   ref: ${{ github.sha }}
+        with:
+          ref: ${{ github.sha }}
         
 
       
@@ -121,6 +121,7 @@ jobs:
             echo "No new migrations needed. Everything is up-to-date!"
           else
             echo "Ugrdae Head"
+            alembic revision --autogenerate
             alembic upgrade head 
           fi
         env:
