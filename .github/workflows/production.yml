@@ -112,7 +112,8 @@ jobs:
           echo "Return code is $alembicReturnCode" ${{ github.sha }}
           set -o pipefail
           . venv/bin/activate
-          alembic upgrade head
+          # alembic upgrade head
+          alembic check
           # alembic check || true
           # alembicReturnCode=$?
           # echo "Return code is $alembicReturnCode"
