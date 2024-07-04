@@ -112,18 +112,17 @@ jobs:
           echo "Return code is $alembicReturnCode" ${{ github.sha }}
           set -o pipefail
           . venv/bin/activate
-          # alembic upgrade head
+          alembic upgrade head
           # alembic check
-          alembic check
-          alembicReturnCode=$?
-          echo "Return code is $alembicReturnCode"
-          if [ "$alembicReturnCode" -eq 0 ]; then
-            echo "No new migrations needed. Everything is up-to-date!"
-          else
-            echo "Ugrdae Head"
-            alembic revision --autogenerate
-            alembic upgrade head 
-          fi
+          # alembicReturnCode=$?
+          # echo "Return code is $alembicReturnCode"
+          # if [ "$alembicReturnCode" -eq 0 ]; then
+          #   echo "No new migrations needed. Everything is up-to-date!"
+          # else
+          #   echo "Ugrdae Head"
+          #   alembic revision --autogenerate
+          #   alembic upgrade head 
+          # fi
         env:
           DB_HOST: ${{ secrets.DATABASE_HOST_URI }}
           DB_PORT: ${{ secrets.DATABASE_PORT }}
