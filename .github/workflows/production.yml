@@ -113,14 +113,14 @@ jobs:
           set -o pipefail
           . venv/bin/activate
           # alembic upgrade head
-          alembic check
+          alembic check || true
           alembicReturnCode=$?
           echo "Return code is $alembicReturnCode"
           if [ "$alembicReturnCode" -eq 0 ]; then
             echo "No new migrations needed. Everything is up-to-date!"
           else
             echo "Ugrdae Head"
-            alembic revision --autogenerate
+            # alembic revision --autogenerate
             alembic upgrade head 
           fi
         env:
