@@ -106,38 +106,38 @@ jobs:
         run: python3 -m venv venv && source venv/bin/activate && pip3 install -r requirements.txt
         if: steps.cache-venv.outputs.cache-hit != 'true'
       
-      - name: Check for pending migrations
-        run: |
+      # - name: Check for pending migrations
+      #   run: |
         
-          echo "Return code is $alembicReturnCode" ${{ github.sha }}
-          set -o pipefail
-          . venv/bin/activate
-          # alembic upgrade head
-          alembic check || true
-          alembicReturnCode=$?
-          echo "Return code is $alembicReturnCode"
-          if [ "$alembicReturnCode" -eq 0 ]; then
-            echo "No new migrations needed. Everything is up-to-date!"
-          else
-            echo "Ugrdae Head"
-            # alembic revision --autogenerate
-            alembic upgrade head 
-          fi
-        env:
-          DB_HOST: ${{ secrets.DATABASE_HOST_URI }}
-          DB_PORT: ${{ secrets.DATABASE_PORT }}
-          DB_NAME: ${{ secrets.DATABASE_NAME }}
-          DB_USER: ${{ secrets.DATABASE_USER_NAME }}
-          DB_PASSWORD: ${{ secrets.DATABASE_PASSWORD }}
-          ENVIRONMENT_MODE: "local"
-          JWT_SECRET_KEY: "KEY" 
-          JWT_ALGORITHM: "KEY" 
-          JWT_ACCESS_TOKEN_EXPIRE_MINUTES: "KEY" 
-          AWS_S3_CLIENT_ACCESS_KEY: "KEY" 
-          AWS_S3_CLIENT_SECRET_ACCESS_KEY: "KEY" 
-          AWS_REGION_NAME: "KEY" 
-          AWS_S3_BUCKET_NAME: "KEY" 
-        # continue-on-error: true
+      #     echo "Return code is $alembicReturnCode" ${{ github.sha }}
+      #     set -o pipefail
+      #     . venv/bin/activate
+      #     # alembic upgrade head
+      #     alembic check || true
+      #     alembicReturnCode=$?
+      #     echo "Return code is $alembicReturnCode"
+      #     if [ "$alembicReturnCode" -eq 0 ]; then
+      #       echo "No new migrations needed. Everything is up-to-date!"
+      #     else
+      #       echo "Ugrdae Head"
+      #       # alembic revision --autogenerate
+      #       alembic upgrade head 
+      #     fi
+      #   env:
+      #     DB_HOST: ${{ secrets.DATABASE_HOST_URI }}
+      #     DB_PORT: ${{ secrets.DATABASE_PORT }}
+      #     DB_NAME: ${{ secrets.DATABASE_NAME }}
+      #     DB_USER: ${{ secrets.DATABASE_USER_NAME }}
+      #     DB_PASSWORD: ${{ secrets.DATABASE_PASSWORD }}
+      #     ENVIRONMENT_MODE: "local"
+      #     JWT_SECRET_KEY: "KEY" 
+      #     JWT_ALGORITHM: "KEY" 
+      #     JWT_ACCESS_TOKEN_EXPIRE_MINUTES: "KEY" 
+      #     AWS_S3_CLIENT_ACCESS_KEY: "KEY" 
+      #     AWS_S3_CLIENT_SECRET_ACCESS_KEY: "KEY" 
+      #     AWS_REGION_NAME: "KEY" 
+      #     AWS_S3_BUCKET_NAME: "KEY" 
+      #   # continue-on-error: true
       
       # - name: Migration If Need 
       #   run: |
