@@ -113,7 +113,7 @@ jobs:
           set -o pipefail
           . venv/bin/activate
           # alembic upgrade head 
-          alembic check || true
+          alembic check && 1
           alembicReturnCode=$?
           echo "Return code is $alembicReturnCode"
           if [ "$alembicReturnCode" -eq 0 ]; then
