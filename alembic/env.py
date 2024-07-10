@@ -7,9 +7,9 @@ from alembic import context
 from api.core.db import async_engine
 
 # Must Import All Of your Models here
-from api.models.Register import Register
-from api.models.Profile import Profile
-from api.models.SocialMedia import SocialMedia
+# from api.models.Register import Register
+# from api.models.Profile import Profile
+# from api.models.SocialMedia import SocialMedia
 from api.models.Bio import Bio
 
 from api.models.Base import Base

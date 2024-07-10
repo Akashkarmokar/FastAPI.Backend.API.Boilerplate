@@ -72,6 +72,10 @@ jobs:
     steps:
       # Check out repo so our workflow can access it
       - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.sha }}
+        
+
       
       # Step-1 Setup Python
       - name: Set up Python
@@ -104,8 +108,20 @@ jobs:
       
       - name: Check for pending migrations
         run: |
+        
+          echo "Return code is $alembicReturnCode" ${{ github.sha }}
+          set -o pipefail
           . venv/bin/activate
-          alembic upgrade head
+          # alembic upgrade head 
+          alembic check && true
+          alembicReturnCode=$?
+          echo "Return code is $alembicReturnCode"
+          if [ "$alembicReturnCode" -eq 0 ]; then
+            echo "No new migrations needed. Everything is up-to-date!"
+          else
+            echo "Ugrdae Head"
+            alembic upgrade head 
+          fi
         env:
           DB_HOST: ${{ secrets.DATABASE_HOST_URI }}
           DB_PORT: ${{ secrets.DATABASE_PORT }}
@@ -120,7 +136,9 @@ jobs:
           AWS_S3_CLIENT_SECRET_ACCESS_KEY: "KEY" 
           AWS_REGION_NAME: "KEY" 
           AWS_S3_BUCKET_NAME: "KEY" 
-
+        # continue-on-error: true
+       
+  
       - name: Install AWS CLI
         uses: unfor19/install-aws-cli-action@v1
         with:
@@ -134,13 +152,13 @@ jobs:
         with:
           name: api
       - name: Upload to S3
-        run: aws s3 cp api.zip s3://protfoliobackendapi/api.zip
+        run: aws s3 cp api.zip s3://protfoliobackendapicode/api.zip
         env:
           AWS_ACCESS_KEY_ID: ${{ secrets.AWS_SECRET_ACCESS_KEY_ID }}
           AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
           AWS_DEFAULT_REGION: ${{ secrets.AWS_DEFAULT_REGION }}
       - name: Deploy new Lambda
-        run: aws lambda update-function-code --function-name Protfolio_Backend_APP --s3-bucket protfoliobackendapi --s3-key api.zip
+        run: aws lambda update-function-code --function-name Protfolio_Backend_APP --s3-bucket protfoliobackendapicode --s3-key api.zip
         env:
           AWS_ACCESS_KEY_ID: ${{ secrets.AWS_SECRET_ACCESS_KEY_ID }}
           AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
