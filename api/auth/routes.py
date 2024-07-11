@@ -14,7 +14,7 @@ AuthRoutes = APIRouter()
 
 @AuthRoutes.post("/sign-up", status_code = status.HTTP_200_OK)
 async def signup_user(request_body: SignupDTO, response: Response, session: AsyncSession):
-    
+    print("Payload", request_body.email)
     try:
         doesExistAnyUser = await ReadRegisterRepository(session= session).read_by_email(email_address=request_body.email)
         print("Does Exist: ", doesExistAnyUser)
