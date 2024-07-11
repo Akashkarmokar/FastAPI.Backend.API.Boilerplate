@@ -48,6 +48,11 @@ jobs:
 
       - name: Directory
         run: ls ./venv/lib/
+
+      - name: Test
+        run: |
+          python3 -m venv venv
+          ls .venv/lib/
         
       # Step-4 Build a Virtual ENV, but only if it doesn't already exist
       - name: Activate Virtual ENV
