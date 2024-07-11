@@ -2,7 +2,7 @@ from datetime import datetime, timedelta, timezone
 from jose import jwt
 from core.settings import config
 from passlib.context import CryptContext
-
+import bcrypt 
 
 # pwd_context = CryptContext(schemes=["argon2"])
 
@@ -13,10 +13,13 @@ class PassHash:
         
     
     def get_hash_password(self, plain_password: str) -> str:
-        
+        byte_string = bcrypt.hashpw(password=plain_password.encode("utf-8"), salt=bcrypt.gensalt(12))
+        print("BYTE : ", byte_string)
+        return byte_string.decode('utf-8')
         return self.pwd_context.hash(plain_password)
     
     def verify_password(self, plain_password: str, hash_password: str) -> bool:
+        return bcrypt.checkpw(password=plain_password.encode("utf-8"), hashed_password= hash_password.encode("utf-8"))
         # return bcrypt.verify(plain_password, hash_password)
         # return plain_password == hash_password
         return self.pwd_context.verify(plain_password, hash_password)

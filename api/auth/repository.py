@@ -67,7 +67,7 @@ class CreateRegisterRepository:
                 hash_pass = PassHash().get_hash_password(plain_password= plain_password)
                 print("Hash Pash: ", hash_pass)
                 # hash_pass = "hello"
-                user = RegisterModel(email=email, password = plain_password)
+                user = RegisterModel(email=email, password = hash_pass)
                 session.add(user)
                 await session.commit()
                 created_user = await ReadRegisterRepository(self.session).read_by_id(user.id)
