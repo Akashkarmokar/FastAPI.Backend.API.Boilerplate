@@ -15,7 +15,7 @@ jobs:
 
   CI:
     # Define the runner used in the workflow
-    runs-on: ubuntu-24.04
+    runs-on: ubuntu-latest
     steps:
 
       # Check out repo so our workflow can access it
