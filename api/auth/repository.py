@@ -61,6 +61,8 @@ class CreateRegisterRepository:
 
     async def create_user(self,email: str, plain_password: str):
         try:
+            print("Email: ", email)
+            print("Plain Password: ", plain_password)
             async with self.session.begin() as session:
                 # hash_pass = PassHash().get_hash_password(plain_password= plain_password)
                 # hash_pass = "hello"

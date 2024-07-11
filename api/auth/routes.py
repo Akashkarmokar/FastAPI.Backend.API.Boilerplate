@@ -17,6 +17,7 @@ async def signup_user(request_body: SignupDTO, response: Response, session: Asyn
     
     try:
         doesExistAnyUser = await ReadRegisterRepository(session= session).read_by_email(email_address=request_body.email)
+        print("Does Exist: ", doesExistAnyUser)
         if doesExistAnyUser :
             return JSONResponse(content = {
                 "message": "BAD",
@@ -24,6 +25,7 @@ async def signup_user(request_body: SignupDTO, response: Response, session: Asyn
                 "data": None
             })
         created_user = await CreateRegisterRepository(session=session).create_user(request_body.email,request_body.password)
+        print("Created User: ", created_user)
         if created_user is not None:
             response.status_code = status.HTTP_201_CREATED
             data = jsonable_encoder({
