@@ -38,15 +38,15 @@ jobs:
 
       # Step-3 Setup Virtual ENV
       # https://docs.github.com/en/actions/guides/caching-dependencies-to-speed-up-workflows
-      # - name:  Virtual ENV
-      #   uses: actions/cache@v4
-      #   id: cache-venv # name for referring later
-      #   with:
-      #     path: venv # what we cache: the Virtual ENV
-      #     # The cache key depends on requirements.txt
-      #     key: ${{ runner.os }}-venv-${{ hashFiles('**/requirements*.txt') }}
-      #     restore-keys: |
-      #       ${{ runner.os }}-venv-
+      - name:  Virtual ENV
+        uses: actions/cache@v4
+        id: cache-venv # name for referring later
+        with:
+          path: venv # what we cache: the Virtual ENV
+          # The cache key depends on requirements.txt
+          key: ${{ runner.os }}-venv-${{ hashFiles('**/requirements*.txt') }}
+          restore-keys: |
+            ${{ runner.os }}-venv-
 
       # Step-4 Build a Virtual ENV, but only if it doesn't already exist
       - name: Activate Virtual ENV
