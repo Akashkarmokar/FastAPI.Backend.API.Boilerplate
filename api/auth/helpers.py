@@ -9,18 +9,16 @@ from passlib.context import CryptContext
 
 class PassHash:
     def __init__(self) -> None:
-        self.pwd_context = CryptContext(schemes=["argon2"])
-        # self.salt = bcrypt.gensalt()
-        pass
+        self.pwd_context = CryptContext(schemes=["bcrypt"])
+        
     
     def get_hash_password(self, plain_password: str) -> str:
-        # return bcrypt.hash(plain_password) 
-        # return bcrypt.hashpw(plain_password.encode('utf-8'), salt=self.salt)
+        
         return self.pwd_context.hash(plain_password)
     
     def verify_password(self, plain_password: str, hash_password: str) -> bool:
         # return bcrypt.verify(plain_password, hash_password)
-        return plain_password == hash_password
+        # return plain_password == hash_password
         return self.pwd_context.verify(plain_password, hash_password)
         # return bcrypt.checkpw(plain_password.encode('utf-8'), hash_password.encode('utf-8'))
 
