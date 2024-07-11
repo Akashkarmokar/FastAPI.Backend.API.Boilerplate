@@ -15,13 +15,9 @@ jobs:
 
   CI:
     # Define the runner used in the workflow
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     steps:
 
-      - name: Clean Up Workspace
-        run: |
-          deactivate  # Deactivate any active virtual environment
-          rm -rf venv
       # Check out repo so our workflow can access it
       - uses: actions/checkout@v4
       
